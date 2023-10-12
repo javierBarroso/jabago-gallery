@@ -1,0 +1,147 @@
+.wrap {
+  position: relative;
+  display: block;
+}
+.wrap .gallery-settings, .wrap .gallery-images {
+  display: block;
+  position: relative;
+  background: #fff;
+  height: -moz-fit-content;
+  height: fit-content;
+  border-radius: 5px;
+  padding: 30px 20px;
+  margin: 1px;
+  box-shadow: 0 10px 25px rgba(53, 52, 52, 0.2);
+}
+.wrap .gallery-settings .options, .wrap .gallery-images .options {
+  width: 100%;
+}
+.wrap .gallery-settings .options input, .wrap .gallery-settings .options select, .wrap .gallery-images .options input, .wrap .gallery-images .options select {
+  min-width: 50%;
+}
+@media screen and (max-width: 700px) {
+  .wrap .gallery-settings .options input, .wrap .gallery-settings .options select, .wrap .gallery-images .options input, .wrap .gallery-images .options select {
+    min-width: 100%;
+  }
+}
+.wrap .gallery-settings .images .image, .wrap .gallery-images .images .image {
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+  margin: 20px 0;
+}
+.wrap .gallery-settings .images .image img, .wrap .gallery-images .images .image img {
+  width: 250px;
+  height: 100%;
+  margin: auto;
+}
+.wrap .gallery-settings .images .image .image-info, .wrap .gallery-images .images .image .image-info {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+.wrap .gallery-settings .images .image .image-actions, .wrap .gallery-images .images .image .image-actions {
+  display: flex;
+  align-items: flex-end;
+}
+.wrap .gallery-settings .images .image .image-actions a, .wrap .gallery-images .images .image .image-actions a {
+  color: #fff;
+  background: rgb(198, 32, 13);
+  border-radius: 5px;
+}
+@media screen and (max-width: 700px) {
+  .wrap .gallery-settings .images .image, .wrap .gallery-images .images .image {
+    flex-direction: column;
+  }
+}
+
+.jabago-radio-input {
+  --container_width: 300px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  background-color: rgb(234, 234, 234);
+  color: #000000;
+  width: var(--container_width);
+  overflow: hidden;
+  border: 1px solid rgba(53, 52, 52, 0.226);
+}
+.jabago-radio-input input {
+  display: none;
+}
+.jabago-radio-input label {
+  width: 100%;
+  padding: 10px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  font-weight: 600;
+  letter-spacing: -1px;
+  font-size: 14px;
+  position: relative;
+  transition: 0.2s;
+}
+.jabago-radio-input label:has(input:checked) {
+  color: #fff;
+}
+.jabago-radio-input label:has(input:checked)::after {
+  background-color: rgb(11, 117, 223);
+}
+.jabago-radio-input label::after {
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: "";
+  width: 100%;
+  height: 100%;
+  transition: 0.2s;
+}
+@media screen and (max-width: 700px) {
+  .jabago-radio-input {
+    flex-direction: column;
+    width: 100%;
+  }
+}
+
+.theme-settings {
+  display: block;
+  position: relative;
+  background: #fff;
+  height: -moz-fit-content;
+  height: fit-content;
+  border-radius: 5px;
+  padding: 30px 20px;
+  margin: 1px;
+  box-shadow: 0 10px 25px rgba(53, 52, 52, 0.2);
+}
+.theme-settings table {
+  width: 100%;
+}
+.theme-settings table tbody > :nth-child(2n+1) {
+  background: #eee;
+}
+.theme-settings table tbody tr {
+  display: flex;
+  flex-wrap: wrap;
+}
+.theme-settings table tbody tr .label, .theme-settings table tbody tr .input {
+  padding: 15px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.theme-settings table tbody tr .label span, .theme-settings table tbody tr .input span {
+  margin-left: 10px;
+}
+.theme-settings table tbody tr .label {
+  width: 25%;
+}
+@media screen and (max-width: 700px) {
+  .theme-settings table tbody tr .label {
+    width: 100%;
+  }
+}/*# sourceMappingURL=jabago-gallery-admin.css.map */

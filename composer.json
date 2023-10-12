@@ -1,0 +1,12 @@
+{
+    "name": "javier/jabago-gallery",
+    "type": "project",
+    "license": "GPL",
+    "autoload": {
+        "psr-4": {
+            "JabagoG_Inc\\": "inc/"
+        }
+    },
+    "minimum-stability": "dev",
+    "require": {}
+}

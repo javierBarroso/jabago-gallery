@@ -1,0 +1,778 @@
+.jabago-gallery-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: -moz-fit-content;
+  height: fit-content;
+  z-index: 5;
+  border: none;
+}
+.jabago-gallery-container h2 {
+  margin: 30px 0;
+  font-size: var(--gallery_title_size);
+  color: var(--gallery-title-color);
+}
+.jabago-gallery-container .gallery {
+  width: 100%;
+  padding: var(--gallery-padding);
+  background: transparent;
+}
+.jabago-gallery-container .gallery.square {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--gallery-gap);
+}
+.jabago-gallery-container .gallery.square.focus:nth-child(n) > .image {
+  transition: all 0.5s;
+}
+.jabago-gallery-container .gallery.square.focus:hover:nth-child(n) > .image {
+  transition: all 0.5s;
+  transform: scale(0.95);
+  filter: blur(6px);
+  opacity: 0.8;
+}
+.jabago-gallery-container .gallery.square.focus:hover .image:hover {
+  transform: scale(1);
+  filter: blur(0px);
+  transition: all 0.5s;
+  opacity: 1;
+}
+.jabago-gallery-container .gallery.square .image {
+  width: 300px;
+  height: 300px;
+  overflow: hidden;
+  border: var(--image-border-width) var(--image-border-style) var(--image-border-color);
+  border-radius: var(--image-border-radius);
+  box-shadow: 0 5px 10px rgba(34, 34, 34, 0.2);
+  cursor: pointer;
+  position: relative;
+}
+.jabago-gallery-container .gallery.square .image img {
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center center;
+     object-position: center center;
+  height: 100%;
+  width: 100%;
+  transition-duration: 0.5s;
+}
+.jabago-gallery-container .gallery.square .image .info {
+  transition: all 0.5s;
+  position: absolute;
+  bottom: 0;
+  transform: translateY(100%);
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(transparent, transparent, rgba(2, 2, 2, 0.6666666667));
+  color: #fff;
+  opacity: 0;
+  padding: var(--gallery-padding);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.jabago-gallery-container .gallery.square .image .info h4, .jabago-gallery-container .gallery.square .image .info p {
+  margin: 0;
+  word-wrap: break-word;
+}
+.jabago-gallery-container .gallery.square .image .info h4 {
+  font-size: 20px;
+}
+.jabago-gallery-container .gallery.square .image .info p {
+  font-size: 14px;
+}
+.jabago-gallery-container .gallery.square .image:hover .info {
+  transition: all 0.5s;
+  transform: translateY(0%);
+  opacity: 1;
+}
+.jabago-gallery-container .gallery.square .image.zoom-in {
+  transform: scale(1);
+}
+.jabago-gallery-container .gallery.square .image.zoom-in:hover img {
+  transition-duration: 0.5s;
+  transform: scale(1.05);
+}
+.jabago-gallery-container .gallery.square .image.zoom-out img {
+  transform: scale(1.05);
+}
+.jabago-gallery-container .gallery.square .image.zoom-out:hover img {
+  transition-duration: 0.5s;
+  transform: scale(1);
+}
+.jabago-gallery-container .gallery.square .image.rotate {
+  transform: roate(0) scale(0);
+  transition-duration: 0.5s;
+  z-index: 0;
+}
+.jabago-gallery-container .gallery.square .image.rotate:hover {
+  transition-duration: 0.5s;
+  transform: rotate(5deg) scale(1.05);
+  z-index: 100;
+}
+.jabago-gallery-container .gallery.square .image.shine3d {
+  --i: 1,1;
+  --a: 10deg; /* control the angle of rotation (the smaller, the better) */
+  transform: perspective(400px) rotate3d(var(--i, 1, 1), 0, var(--a));
+  -webkit-mask: linear-gradient(135deg, rgba(255, 255, 255, 0.934) 40%, rgba(255, 255, 255, 0.614), rgba(255, 255, 255, 0.951) 60%) 100% 100%/240% 240%;
+          mask: linear-gradient(135deg, rgba(255, 255, 255, 0.934) 40%, rgba(255, 255, 255, 0.614), rgba(255, 255, 255, 0.951) 60%) 100% 100%/240% 240%;
+  transition: 0.3s;
+  cursor: pointer;
+}
+.jabago-gallery-container .gallery.square .image.shine3d:hover {
+  --i:-1,-1;
+  -webkit-mask-position: 0 0;
+          mask-position: 0 0;
+}
+.jabago-gallery-container .gallery.square .image.flip {
+  transform-style: preserve-3d;
+  transform: perspective(600px) rotateY(0deg);
+  transition: all ease 0.3s;
+}
+.jabago-gallery-container .gallery.square .image.flip:hover {
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.75);
+  transform: perspective(600px) rotateY(180deg);
+}
+.jabago-gallery-container .gallery.tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(30%, 1fr));
+  grid-auto-rows: 200px;
+  grid-auto-flow: dense;
+  gap: var(--gallery-gap);
+}
+.jabago-gallery-container .gallery.tiles.focus:nth-child(n) > .image {
+  transition: all 0.5s;
+}
+.jabago-gallery-container .gallery.tiles.focus:hover:nth-child(n) > .image {
+  transition: all 0.5s;
+  transform: scale(0.95);
+  filter: blur(6px);
+  opacity: 0.8;
+}
+.jabago-gallery-container .gallery.tiles.focus:hover .image:hover {
+  transform: scale(1);
+  filter: blur(0px);
+  transition: all 0.5s;
+  opacity: 1;
+}
+.jabago-gallery-container .gallery.tiles :nth-child(1) {
+  grid-row: span 2;
+}
+.jabago-gallery-container .gallery.tiles :nth-child(2) {
+  grid-row: span 2;
+  grid-column: span 2;
+}
+.jabago-gallery-container .gallery.tiles :nth-child(8) {
+  grid-row: span 2;
+  grid-column: span 2;
+}
+.jabago-gallery-container .gallery.tiles :nth-child(9) {
+  grid-column: span 2;
+}
+.jabago-gallery-container .gallery.tiles :nth-child(4) {
+  grid-row: span 2;
+}
+@media (max-width: 560px) {
+  .jabago-gallery-container .gallery.tiles :nth-child(1) {
+    grid-row: span 1;
+  }
+  .jabago-gallery-container .gallery.tiles :nth-child(2) {
+    grid-row: span 1;
+    grid-column: span 1;
+  }
+  .jabago-gallery-container .gallery.tiles :nth-child(8) {
+    grid-row: span 1;
+    grid-column: span 1;
+  }
+  .jabago-gallery-container .gallery.tiles :nth-child(9) {
+    grid-column: span 1;
+  }
+  .jabago-gallery-container .gallery.tiles :nth-child(4) {
+    grid-row: span 1;
+  }
+}
+.jabago-gallery-container .gallery.tiles .image {
+  border: var(--image-border-width) var(--image-border-style) var(--image-border-color);
+  border-radius: var(--image-border-radius);
+  box-shadow: 0 5px 10px rgba(34, 34, 34, 0.2);
+  cursor: pointer;
+  overflow: hidden;
+  min-width: 30%;
+  position: relative;
+}
+.jabago-gallery-container .gallery.tiles .image img {
+  height: 100%;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center center;
+     object-position: center center;
+  transition-duration: 0.5s;
+}
+.jabago-gallery-container .gallery.tiles .image .info {
+  transition: all 0.5s;
+  position: absolute;
+  bottom: 0;
+  transform: translateY(100%);
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(transparent, transparent, rgba(2, 2, 2, 0.6666666667));
+  color: #fff;
+  opacity: 0;
+  padding: var(--gallery-padding);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.jabago-gallery-container .gallery.tiles .image .info h4, .jabago-gallery-container .gallery.tiles .image .info p {
+  margin: 0;
+  word-wrap: break-word;
+}
+.jabago-gallery-container .gallery.tiles .image .info h4 {
+  font-size: 20px;
+}
+.jabago-gallery-container .gallery.tiles .image .info p {
+  font-size: 14px;
+}
+.jabago-gallery-container .gallery.tiles .image:hover .info {
+  transition: all 0.5s;
+  transform: translateY(0%);
+  opacity: 1;
+}
+.jabago-gallery-container .gallery.tiles .image.zoom-in {
+  transform: scale(1);
+}
+.jabago-gallery-container .gallery.tiles .image.zoom-in:hover img {
+  transition-duration: 0.5s;
+  transform: scale(1.05);
+}
+.jabago-gallery-container .gallery.tiles .image.zoom-out img {
+  transform: scale(1.05);
+}
+.jabago-gallery-container .gallery.tiles .image.zoom-out:hover img {
+  transition-duration: 0.5s;
+  transform: scale(1);
+}
+.jabago-gallery-container .gallery.tiles .image.rotate {
+  transform: roate(0) scale(0);
+  transition-duration: 0.5s;
+  z-index: 0;
+}
+.jabago-gallery-container .gallery.tiles .image.rotate:hover {
+  transition-duration: 0.5s;
+  transform: rotate(5deg) scale(1.05);
+  z-index: 100;
+}
+.jabago-gallery-container .gallery.tiles .image.shine3d {
+  --i: 1,1;
+  --a: 10deg; /* control the angle of rotation (the smaller, the better) */
+  transform: perspective(400px) rotate3d(var(--i, 1, 1), 0, var(--a));
+  -webkit-mask: linear-gradient(135deg, rgba(255, 255, 255, 0.934) 40%, rgba(255, 255, 255, 0.614), rgba(255, 255, 255, 0.951) 60%) 100% 100%/240% 240%;
+          mask: linear-gradient(135deg, rgba(255, 255, 255, 0.934) 40%, rgba(255, 255, 255, 0.614), rgba(255, 255, 255, 0.951) 60%) 100% 100%/240% 240%;
+  transition: 0.3s;
+  cursor: pointer;
+}
+.jabago-gallery-container .gallery.tiles .image.shine3d:hover {
+  --i:-1,-1;
+  -webkit-mask-position: 0 0;
+          mask-position: 0 0;
+}
+.jabago-gallery-container .gallery.tiles .image.flip {
+  transform-style: preserve-3d;
+  transform: perspective(600px) rotateY(0deg);
+  transition: all ease 0.3s;
+}
+.jabago-gallery-container .gallery.tiles .image.flip:hover {
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.75);
+  transform: perspective(600px) rotateY(180deg);
+}
+.jabago-gallery-container .gallery.tiles .image.parallax {
+  --f: 0.03; /* the parallax factor (the smaller the better) */
+  --r: 0px; /* radius */
+  --_f: calc(100% * var(--f) / (1 + var(--f)));
+  --_a: calc(120deg * var(--f));
+  transition: 0.5s;
+  cursor: pointer;
+  -webkit-clip-path: inset(0 var(--_f) 0 0 round var(--r));
+          clip-path: inset(0 var(--_f) 0 0 round var(--r));
+  transform: perspective(200px) var(--_t, rotateY(var(--_a)));
+}
+.jabago-gallery-container .gallery.tiles .image.parallax:hover {
+  -webkit-clip-path: inset(0 0 0 var(--_f) round var(--r));
+          clip-path: inset(0 0 0 var(--_f) round var(--r));
+  --_t: translateX(calc(-1 * var(--_f))) rotateY(calc(-1 * var(--_a)));
+}
+.jabago-gallery-container .gallery.masonry {
+  display: inline-block;
+  -moz-columns: 5 250px;
+       columns: 5 250px;
+  grid-gap: var(--gallery-gap);
+}
+.jabago-gallery-container .gallery.masonry.focus:nth-child(n) > .image {
+  transition: all 0.5s;
+}
+.jabago-gallery-container .gallery.masonry.focus:hover:nth-child(n) > .image {
+  transition: all 0.5s;
+  transform: scale(0.95);
+  filter: blur(6px);
+  opacity: 0.8;
+}
+.jabago-gallery-container .gallery.masonry.focus:hover .image:hover {
+  transform: scale(1);
+  filter: blur(0px);
+  transition: all 0.5s;
+  opacity: 1;
+}
+.jabago-gallery-container .gallery.masonry .image {
+  background: #fff;
+  box-shadow: 0 5px 10px rgba(34, 34, 34, 0.2);
+  cursor: pointer;
+  overflow: hidden;
+  min-width: 250px;
+  margin-bottom: 10px;
+  display: block;
+  position: relative;
+  border-radius: var(--image-border-radius);
+  transition-duration: 0.5s;
+}
+.jabago-gallery-container .gallery.masonry .image img {
+  display: block;
+  transition-duration: 0.5s;
+  position: relative;
+  transform: scale(1);
+  border: solid #fff var(--image-border-width);
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: 100%;
+}
+.jabago-gallery-container .gallery.masonry .image::after {
+  outline: var(--image-border-width) var(--image-border-color) var(--image-border-style);
+  -moz-outline-radius: var(--image-border-radius);
+  outline-offset: var(--masonry-offset);
+  border-radius: var(--image-border-radius);
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  overflow: hidden;
+}
+.jabago-gallery-container .gallery.masonry .image .info {
+  transition: all 0.5s;
+  position: absolute;
+  bottom: var(--image-border-width);
+  transform: translateY(100%);
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(transparent, transparent, rgba(2, 2, 2, 0.6666666667));
+  color: #fff;
+  opacity: 0;
+  padding: calc(var(--image-border-width) + 10px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.jabago-gallery-container .gallery.masonry .image .info h3 {
+  margin-top: 100%;
+  mix-blend-mode: normal;
+}
+.jabago-gallery-container .gallery.masonry .image .info h4, .jabago-gallery-container .gallery.masonry .image .info p {
+  margin: 0;
+  word-wrap: break-word;
+}
+.jabago-gallery-container .gallery.masonry .image .info h4 {
+  font-size: 20px;
+}
+.jabago-gallery-container .gallery.masonry .image .info p {
+  font-size: 14px;
+}
+.jabago-gallery-container .gallery.masonry .image:hover .info {
+  transition: all 0.9s;
+  transform: translateY(0%);
+  opacity: 1;
+}
+.jabago-gallery-container .gallery.masonry .image.zoom-in {
+  transform: scale(1);
+}
+.jabago-gallery-container .gallery.masonry .image.zoom-in:hover img {
+  transition-duration: 0.5s;
+  transform: scale(1.05);
+}
+.jabago-gallery-container .gallery.masonry .image.zoom-out img {
+  transform: scale(1.05);
+}
+.jabago-gallery-container .gallery.masonry .image.zoom-out:hover img {
+  transition-duration: 0.5s;
+  transform: scale(1);
+}
+.jabago-gallery-container .gallery.masonry .image.rotate {
+  transform: roate(0) scale(0);
+  transition-duration: 0.5s;
+  z-index: 0;
+}
+.jabago-gallery-container .gallery.masonry .image.rotate:hover {
+  transition-duration: 0.5s;
+  transform: rotate(5deg) scale(1.05);
+  z-index: 100;
+}
+.jabago-gallery-container .gallery.masonry .image.shine3d {
+  --i: 1,1;
+  --a: 10deg; /* control the angle of rotation (the smaller, the better) */
+  transform: perspective(400px) rotate3d(var(--i, 1, 1), 0, var(--a));
+  -webkit-mask: linear-gradient(135deg, rgba(255, 255, 255, 0.934) 40%, rgba(255, 255, 255, 0.614), rgba(255, 255, 255, 0.951) 60%) 100% 100%/240% 240%;
+          mask: linear-gradient(135deg, rgba(255, 255, 255, 0.934) 40%, rgba(255, 255, 255, 0.614), rgba(255, 255, 255, 0.951) 60%) 100% 100%/240% 240%;
+  transition: 0.3s;
+  cursor: pointer;
+}
+.jabago-gallery-container .gallery.masonry .image.shine3d:hover {
+  --i:-1,-1;
+  -webkit-mask-position: 0 0;
+          mask-position: 0 0;
+}
+.jabago-gallery-container .gallery.masonry .image.flip {
+  transform-style: preserve-3d;
+  transform: perspective(600px) rotateY(0deg);
+  transition: all ease 0.3s;
+}
+.jabago-gallery-container .gallery.masonry .image.flip:hover {
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.75);
+  transform: perspective(600px) rotateY(180deg);
+}
+.jabago-gallery-container .gallery.masonry .image.parallax {
+  --f: 0.02; /* the parallax factor (the smaller the better) */
+  --r: 10px; /* radius */
+  --_f: calc(100% * var(--f) / (1 + var(--f)));
+  --_a: calc(90deg * var(--f));
+  -webkit-clip-path: inset(0 var(--_f) 0 0 round var(--r));
+          clip-path: inset(0 var(--_f) 0 0 round var(--r));
+  transform: perspective(200px) var(--_t, rotateY(var(--_a)));
+  transition: 0.5s;
+  cursor: pointer;
+}
+.jabago-gallery-container .gallery.masonry .image.parallax:hover {
+  -webkit-clip-path: inset(0 0 0 var(--_f) round var(--r));
+          clip-path: inset(0 0 0 var(--_f) round var(--r));
+  --_t: translateX(calc(-1 * var(--_f))) rotateY(calc(-1 * var(--_a)));
+}
+.jabago-gallery-container .gallery.justify {
+  display: flex;
+  flex-wrap: wrap;
+  flex-grow: 1;
+  gap: var(--gallery-gap);
+  justify-content: space-evenly;
+}
+.jabago-gallery-container .gallery.justify.focus:nth-child(n) > .image {
+  transition: all 0.5s;
+}
+.jabago-gallery-container .gallery.justify.focus:hover:nth-child(n) > .image {
+  transition: all 0.5s;
+  transform: scale(0.95);
+  filter: blur(6px);
+  opacity: 0.8;
+}
+.jabago-gallery-container .gallery.justify.focus:hover .image:hover {
+  transform: scale(1);
+  filter: blur(0px);
+  transition: all 0.5s;
+  opacity: 1;
+}
+.jabago-gallery-container .gallery.justify .image {
+  border: var(--image-border-width) var(--image-border-style) var(--image-border-color);
+  border-radius: var(--image-border-radius);
+  box-shadow: 0 5px 10px rgba(34, 34, 34, 0.2);
+  cursor: pointer;
+  overflow: hidden;
+  min-width: 250px;
+  height: 250px;
+  flex-grow: 1;
+  position: relative;
+}
+.jabago-gallery-container .gallery.justify .image:nth-child(4n+1) {
+  flex-basis: 40%;
+}
+.jabago-gallery-container .gallery.justify .image:nth-child(4n+2) {
+  flex-basis: 20%;
+}
+.jabago-gallery-container .gallery.justify .image:nth-child(4n+3) {
+  flex-basis: 20%;
+}
+.jabago-gallery-container .gallery.justify .image:nth-child(4n+4) {
+  flex-basis: 40%;
+}
+.jabago-gallery-container .gallery.justify .image img {
+  height: 100%;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center center;
+     object-position: center center;
+  transition-duration: 0.5s;
+}
+.jabago-gallery-container .gallery.justify .image .info {
+  transition: all 0.5s;
+  position: absolute;
+  bottom: 0;
+  transform: translateY(100%);
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(transparent, transparent rgba(2, 2, 2, 0.6666666667));
+  color: #fff;
+  opacity: 0;
+  padding: var(--gallery-padding);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.jabago-gallery-container .gallery.justify .image .info h4, .jabago-gallery-container .gallery.justify .image .info p {
+  margin: 0;
+  word-wrap: break-word;
+}
+.jabago-gallery-container .gallery.justify .image .info h4 {
+  font-size: 20px;
+}
+.jabago-gallery-container .gallery.justify .image .info p {
+  font-size: 14px;
+}
+.jabago-gallery-container .gallery.justify .image:hover .info {
+  transition: all 0.5s;
+  transform: translateY(0%);
+  opacity: 1;
+}
+.jabago-gallery-container .gallery.justify .image.zoom-in {
+  transform: scale(1);
+}
+.jabago-gallery-container .gallery.justify .image.zoom-in:hover img {
+  transition-duration: 0.5s;
+  transform: scale(1.05);
+}
+.jabago-gallery-container .gallery.justify .image.zoom-out img {
+  transform: scale(1.05);
+}
+.jabago-gallery-container .gallery.justify .image.zoom-out:hover img {
+  transition-duration: 0.5s;
+  transform: scale(1);
+}
+.jabago-gallery-container .gallery.justify .image.rotate {
+  transform: roate(0) scale(0);
+  transition-duration: 0.5s;
+  z-index: 0;
+}
+.jabago-gallery-container .gallery.justify .image.rotate:hover {
+  transition-duration: 0.5s;
+  transform: rotate(5deg) scale(1.05);
+  z-index: 100;
+  justify-content: space-between;
+}
+.jabago-gallery-container .gallery.justify .image.shine3d {
+  --i: 1,1;
+  --a: 10deg; /* control the angle of rotation (the smaller, the better) */
+  transform: perspective(400px) rotate3d(var(--i, 1, 1), 0, var(--a));
+  -webkit-mask: linear-gradient(135deg, rgba(255, 255, 255, 0.934) 40%, rgba(255, 255, 255, 0.614), rgba(255, 255, 255, 0.951) 60%) 100% 100%/240% 240%;
+          mask: linear-gradient(135deg, rgba(255, 255, 255, 0.934) 40%, rgba(255, 255, 255, 0.614), rgba(255, 255, 255, 0.951) 60%) 100% 100%/240% 240%;
+  transition: 0.3s;
+  cursor: pointer;
+}
+.jabago-gallery-container .gallery.justify .image.shine3d:hover {
+  --i:-1,-1;
+  -webkit-mask-position: 0 0;
+          mask-position: 0 0;
+}
+.jabago-gallery-container .gallery.justify .image.flip {
+  transform-style: preserve-3d;
+  transform: perspective(600px) rotateY(0deg);
+  transition: all ease 0.3s;
+}
+.jabago-gallery-container .gallery.justify .image.flip:hover {
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.75);
+  transform: perspective(600px) rotateY(180deg);
+}
+.jabago-gallery-container .gallery.narrow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 350px;
+}
+.jabago-gallery-container .gallery.narrow .image {
+  width: 0px;
+  height: 250px;
+  flex-grow: 1;
+  position: relative;
+  filter: contrast(50%) brightness(50%);
+  transition: all 0.8s cubic-bezier(0.68, -0.15, 0.265, 1.55);
+  overflow: hidden;
+}
+.jabago-gallery-container .gallery.narrow .image img {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center center;
+     object-position: center center;
+}
+.jabago-gallery-container .gallery.narrow .image .info {
+  transition: all 0.5s ease-in-out;
+  position: absolute;
+  bottom: 0;
+  transform: translateY(100%);
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(transparent, transparent, rgba(2, 2, 2, 0.6666666667));
+  color: #fff;
+  opacity: 0;
+  padding: var(--gallery-padding);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.jabago-gallery-container .gallery.narrow .image .info p {
+  display: none;
+}
+.jabago-gallery-container .gallery.narrow .image:hover {
+  border-radius: var(--image-border-radius);
+  box-shadow: 0 5px 10px rgba(34, 34, 34, 0.2);
+  transition: all 0.8s cubic-bezier(0.6, 1.9, 1.4, 1.6);
+  width: 350px;
+  height: 350px;
+  filter: contrast(120%) brightness(100%);
+}
+.jabago-gallery-container .gallery.narrow .image:hover .info {
+  transition: all 0.5s ease-in-out;
+  transform: translateY(0%);
+  opacity: 1;
+}
+.jabago-gallery-container .gallery.slider {
+  display: flex;
+  aspect-ratio: 16/9;
+  padding: 0;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  box-shadow: 0 5px 10px rgba(34, 34, 34, 0.2);
+}
+.jabago-gallery-container .gallery.slider::-webkit-scrollbar {
+  display: none;
+  behavior: smooth;
+}
+.jabago-gallery-container .gallery.slider .image {
+  flex: 1 0 100%;
+  scroll-snap-align: start;
+  width: 100%;
+}
+.jabago-gallery-container .gallery.slider .image img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center center;
+     object-position: center center;
+}
+.jabago-gallery-container .gallery.slider .info {
+  padding: 10px;
+}
+.jabago-gallery-container .slider-nav {
+  display: flex;
+  gap: 50px;
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+.jabago-gallery-container .slider-nav a {
+  width: 30px;
+  height: 30px;
+  border-radius: 30px;
+  background: #fff;
+  opacity: 0.5;
+  transition: opacity 0.5s ease-in-out;
+}
+.jabago-gallery-container .slider-nav a:hover {
+  transition: opacity 0.5s ease-in-out;
+  opacity: 1;
+}
+
+.lightbox {
+  animation: fade-in 0.3s linear;
+  position: fixed;
+  display: none;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 999;
+  -webkit-backdrop-filter: grayscale(90%) blur(5px);
+          backdrop-filter: grayscale(90%) blur(5px);
+}
+.lightbox .lightbox-container {
+  background: none;
+  height: 80vh;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: 10px auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.lightbox .lightbox-container img {
+  background: tan;
+  height: 80%;
+  margin: 0 auto;
+  outline: #fff solid 2px;
+}
+.lightbox .lightbox-container .info {
+  color: #fff;
+  width: 100%;
+  position: relative;
+}
+.lightbox .lightbox-container .info .close-btn {
+  cursor: pointer;
+  position: absolute;
+  width: 2rem;
+  aspect-ratio: 1;
+  top: 5px;
+  right: 0;
+  border-radius: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  color: #fff;
+}
+.lightbox .lightbox-container .info .close-btn::after {
+  content: "X";
+  font-weight: 700;
+}
+.lightbox .lightbox-container .info h4, .lightbox .lightbox-container .info p {
+  margin: 0;
+  word-wrap: break-word;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+html {
+  scroll-behavior: smooth;
+}/*# sourceMappingURL=jabago-gallery-public.css.map */
