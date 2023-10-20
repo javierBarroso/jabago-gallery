@@ -16,6 +16,12 @@ $edit_theme = 'admin.php?page=jabago-gallery-theme&action=edit&theme=';
 $delete_theme = 'admin.php?page=jabago-gallery-theme&action=delete&theme=';
 $delete_theme_message = 'Are you sure you want to delete this theme?';
 
+if(isset($_GET['action']) && $_GET['action'] == 'delete')
+{
+    ?>
+        <script>window.location.href="admin.php?page=jabago-gallery-theme"</script>
+    <?php
+}
 
 ?>
 
@@ -39,67 +45,29 @@ $delete_theme_message = 'Are you sure you want to delete this theme?';
             </thead>
             <tbody id="the-list">
                 <?php
-                $html = '';
+                
                 foreach ($themes as $key => $theme) {
+
+                    ?>
                     
-                    $html .= '<tr>
-                        <td class="title column-title has-row-actions column-primary page-title" data-colname="name">' . esc_html($theme->name) . ' 
+                    <tr>
+                        <td class="title column-title has-row-actions column-primary page-title" data-colname="name"><?php echo esc_html($theme->name) ?> 
                             <div class="row-actions">
-                                <span class="edit"><a href="' . esc_attr($edit_theme . $theme->ID) . '" aria-label="Edit “Post #1”">Edit</a></span>';
-                                
+                                <span class="edit"><a href="<?php echo esc_attr($edit_theme . $theme->ID) ?>" aria-label="Edit “Post #1”">Edit</a></span>
+                                    <?php
                                     if(count($themes) > 1){
-                                        $html .= '<span class="trash"> | <a href="' . esc_attr('javascript:httpGet("' . $delete_theme . $theme->ID . '")') . '" class="submitdelete" aria-label="Move “Post #1” to the Trash">Delete</a>';
+                                        ?>
+                                        <span class="trash"> | <a href="<?php echo esc_attr('javascript:httpGet("' . $delete_theme . $theme->ID . '")') ?>" class="submitdelete" aria-label="Move “Post #1” to the Trash">Delete</a>
+                                        <?php
                                     }
+                                    ?>
                                 
-                    $html .= '</div>
+                            </div>
                         </td>
-                    </tr>';
+                    </tr>
+
+                    <?php
                 }
-
-                $html_tags = array(
-                    'tr'=>array(
-                        'class'=>array(),
-                        'type'=>array(),
-                        'href'=>array(),
-                        'name'=>array(),
-                        'id'=>array(),
-                        'value'=>array(),
-                    ),
-                    'td'=>array(
-                        'class'=>array(),
-                        'type'=>array(),
-                        'href'=>array(),
-                        'name'=>array(),
-                        'id'=>array(),
-                        'value'=>array(),
-                    ),
-                    'div'=>array(
-                        'class'=>array(),
-                        'type'=>array(),
-                        'href'=>array(),
-                        'name'=>array(),
-                        'id'=>array(),
-                        'value'=>array(),
-                    ),
-                    'span'=>array(
-                        'class'=>array(),
-                        'type'=>array(),
-                        'href'=>array(),
-                        'name'=>array(),
-                        'id'=>array(),
-                        'value'=>array(),
-                    ),
-                    'a'=>array(
-                        'class'=>array(),
-                        'type'=>array(),
-                        'href'=>array(),
-                        'name'=>array(),
-                        'id'=>array(),
-                        'value'=>array(),
-                    ),
-                );
-
-                echo wp_kses($html, $html_tags);
                 ?>
             <tfoot>
                 <tr>

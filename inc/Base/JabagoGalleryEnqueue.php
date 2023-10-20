@@ -16,7 +16,7 @@ class JabagoGalleryEnqueue
 
     function enqueue(){
         wp_enqueue_style( 'jabago-gallery-admin-style', JABAGO_GALLERY_URL . '/assets/css/jabago-gallery-admin.css' );
-        wp_enqueue_script( 'jabago-gallery-admin-script', JABAGO_GALLERY_URL . '/assets/js/jabago-gallery-admin.js', true );
+        wp_enqueue_script( 'jabago-gallery-admin-script', JABAGO_GALLERY_URL . '/assets/js/jabago-gallery-admin.js', [], false, true );
     }
     
     function enqueue_frontend()

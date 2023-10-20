@@ -22,6 +22,7 @@ class JabagoGalleryAdminCallbacks
                 break;
             case 'delete':
                 $this->jabagoGalleryDeleteGallery(sanitize_text_field($_GET['gallery']));
+                require_once JABAGO_GALLERY_PATH . './templates/jabago-galleries-list.php';
                 break;
             default:
                 require_once JABAGO_GALLERY_PATH . './templates/jabago-galleries-list.php';
@@ -42,6 +43,7 @@ class JabagoGalleryAdminCallbacks
                 break;
             case 'delete':
                 $this->jabagoGalleryDeleteTheme(sanitize_text_field($_GET['theme']));
+                require_once JABAGO_GALLERY_PATH . './templates/jabago-gallery-themes.php';
                 break;
             default:
                 require_once JABAGO_GALLERY_PATH . './templates/jabago-gallery-themes.php';
@@ -99,11 +101,6 @@ class JabagoGalleryAdminCallbacks
 
     static public function jabagoGalleryStoreGallery($data, $id = null)
     {
-        
-        if( empty( $data['url'] ) )
-        {
-            return false;
-        }
 
         global $wpdb;
 
@@ -136,7 +133,7 @@ class JabagoGalleryAdminCallbacks
             $wpdb->update(JABAGO_GALLERY_TABLE, array('short_code' => $shortcode), array('ID' => $id));
         }
 
-
+        /**TODO: Asegurarce de que exista imagenes seleccionadas */
 
         foreach ($data['url'] as $key => $value) {
 
@@ -153,7 +150,7 @@ class JabagoGalleryAdminCallbacks
             $wpdb->insert(JABAGO_GALLERY_IMAGES_TABLE, $image_data);
             
         }
-        $edit ? wp_redirect( admin_url( 'admin.php?page=jabago-gallery&action=edit&gallery=' . $id ) ) : wp_redirect( admin_url( 'admin.php?page=jabago-gallery' ) );
+        // $edit ? wp_redirect( admin_url( 'admin.php?page=jabago-gallery&action=edit&gallery=' . $id ) ) : wp_redirect( admin_url( 'admin.php?page=jabago-gallery' ) );
        
 
     }
@@ -165,7 +162,7 @@ class JabagoGalleryAdminCallbacks
         $wpdb->delete(JABAGO_GALLERY_IMAGES_TABLE, array('gallery_id' => $id));
         $wpdb->delete(JABAGO_GALLERY_TABLE, array('ID' => $id));
 
-        wp_redirect( admin_url( 'admin.php?page=jabago-gallery' ) );
+        // wp_redirect( admin_url( 'admin.php?page=jabago-gallery' ) );
     }
 
     static public function jabagoGalleryGetThemes()
@@ -201,47 +198,42 @@ class JabagoGalleryAdminCallbacks
     static public function jabagoGalleryStoreTheme($data, $id = null)
     {
         
-        if( wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce_field'] ) ), 'add_theme' ) )
+        global $wpdb;
+
+        $current_theme = null;
+
+        if($id)
         {
-            global $wpdb;
 
-            $current_theme = null;
-
-            if($id)
-            {
-
-                $query = "SELECT * FROM " . JABAGO_GALLERY_THEMES_TABLE . " WHERE ID = " . $id;
-        
-                $current_theme = $wpdb->get_results( $wpdb->prepare( $query ) )[0];
-
-            }
-
-
-
-            $theme_options = json_encode($data);
-
-            $theme_data = [
-                'ID' => $id ? $id : null,
-                'name' => $data['name'],
-                'options' => $theme_options
-            ];
-
-
-
-            $current_theme ? $wpdb->update(JABAGO_GALLERY_THEMES_TABLE, $theme_data, array('ID' => $current_theme->ID)) : $wpdb->insert(JABAGO_GALLERY_THEMES_TABLE, $theme_data);
-
-            $id ? wp_redirect( admin_url( 'admin.php?page=jabago-gallery-theme&action=edit&theme=' . $id ) ) : wp_redirect( admin_url( 'admin.php?page=jabago-gallery-theme' ) );
+            $query = "SELECT * FROM " . JABAGO_GALLERY_THEMES_TABLE . " WHERE ID = " . $id;
+    
+            $current_theme = $wpdb->get_results( $wpdb->prepare( $query ) )[0];
 
         }
+
+
+
+        $theme_options = json_encode($data);
+
+        $theme_data = [
+            'ID' => $id ? $id : null,
+            'name' => $data['name'],
+            'options' => $theme_options
+        ];
+
+
+
+        $current_theme ? $wpdb->update(JABAGO_GALLERY_THEMES_TABLE, $theme_data, array('ID' => $current_theme->ID)) : $wpdb->insert(JABAGO_GALLERY_THEMES_TABLE, $theme_data);
+        
     }
+    
 
     private function jabagoGalleryDeleteTheme($id)
     {
         global $wpdb;
 
         $wpdb->delete(JABAGO_GALLERY_THEMES_TABLE, array('ID' => $id));
-        
-        wp_redirect( admin_url( 'admin.php?page=jabago-gallery-theme' ) );
+
     }
 
 }

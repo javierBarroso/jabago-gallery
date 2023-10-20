@@ -1,8 +1,9 @@
 <?php
-
 /**
  * @package JabagoGallery
  */
+
+
 
 use JabagoG_Inc\Api\Callbacks\JabagoGalleryAdminCallbacks;
 
@@ -22,7 +23,7 @@ if(isset($_GET['theme'])){
 $nonce = wp_create_nonce( 'add_theme' );
 
 
-if(isset($_POST['save-theme'])){
+if(isset($_POST['save-theme']) && wp_verify_nonce( sanitize_text_field( wp_unslash(  $_POST['nonce_field'] ) ), 'add_theme' )){
     $theme_data = array(
         'show_gallery_title' => $_POST['show-gallery-title'],
 
@@ -47,12 +48,19 @@ if(isset($_POST['save-theme'])){
         'hover_animation_style' => $_POST['hover-animation-style']
     );
 
-
-    
     $jabago_gallery_admin::jabagoGalleryStoreTheme($theme_data, isset($_GET['theme']) ? $_GET['theme'] : null);
+    if(!isset($_GET['theme']))
+    {
+        ?>
+            <script>window.location.href="admin.php?page=jabago-gallery-theme"</script>
+        <?php
+    }else{
+        ?>
+        <script>window.location.href="admin.php?page=jabago-gallery-theme&action=edit&theme=<?php echo esc_html( $_GET['theme'] )?>"</script>
+        <?php
+    }
 }
 ?>
-
 <div class="wrap">
     <h2><?php echo esc_html( "Theme Settings" ) ?></h2>
     <br><br>
@@ -63,12 +71,19 @@ if(isset($_POST['save-theme'])){
         <br>
         <div class="theme-settings">
             <div style="display:flex; padding:10px 20px; gap:10px;">
-
-                <h3><?php echo esc_html('Theme name:') ?></h3>
-                <input style="height: 30px; margin:auto 0" name="theme-name" type="text" id="theme-name" value="<?php echo esc_attr( isset($_GET['theme']) ? $theme->name : '' ) ?>">
+                
+                <h3>General Settings</h3>
             </div>
             <table>
                 <!-- show title -->
+                <tr>
+                    <td class="label">
+                        <label><?php echo esc_html('Theme name:') ?></label>
+                    </td>
+                    <td class="input">
+                        <input style="height: 30px; margin:auto 0" name="theme-name" type="text" id="theme-name" value="<?php echo esc_attr( isset($_GET['theme']) ? $theme->name : '' ) ?>">
+                    </td>
+                </tr>
                 <tr>
                     <td class="label">
                         <label><?php echo esc_html( "Show gallery title:" ) ?></label>
@@ -116,7 +131,7 @@ if(isset($_POST['save-theme'])){
                         <input name="gallery-padding" type="number" id="gallery-padding" value="<?php echo esc_attr( $options ? $options->gallery_padding : '20' ) ?>"><span>px</span>
                     </td>
                 </tr>
-                <tr>
+                <tr style="display:flex; padding:10px; gap:10px;">
                     <th>
                         <h3><?php echo esc_html( 'Border Settings' ) ?></h3>
                     </th>
@@ -167,7 +182,7 @@ if(isset($_POST['save-theme'])){
                         <input name="picture-border-color" type="color" id="picture-border-color" value="<?php echo esc_attr( $options ? $options->picture_border_color : '#ffffff' ) ?>">
                     </td>
                 </tr>
-                <tr>
+                <tr style="display:flex; padding:10px; gap:10px;">
                     <th>
                         <h3><?php echo esc_html( 'On Hover Settings' ) ?></h3>
                     </th>
@@ -184,9 +199,6 @@ if(isset($_POST['save-theme'])){
                             <option <?php echo esc_attr( $options ? ( $options->hover_animation_style == 'zoom-out' ? 'selected' : '') : '' )?> value="zoom-out">Zoom out</option>
                             <option <?php echo esc_attr( $options ? ( $options->hover_animation_style == 'rotate' ? 'selected' : '') : '' )?> value="rotate">Rotate</option>
                             <option <?php echo esc_attr( $options ? ( $options->hover_animation_style == 'shine3d' ? 'selected' : '') : '' )?> value="shine3d">3d Shine</option>
-                            <!-- <option <?php echo esc_attr( $options ? ( $options->hover_animation_style == 'flip' ? 'selected' : '') : '' )?> value="flip">Flip</option>
-                            <option <?php echo esc_attr( $options ? ( $options->hover_animation_style == 'focus' ? 'selected' : '') : '' )?> value="focus">Focus <span style="color: red; font-weight:500; font-style:italic; ">pro</span> </option>
-                            <option <?php echo esc_attr( $options ? ( $options->hover_animation_style == 'parallax' ? 'selected' : '') : '' )?> value="parallax">Parallax <span style="color: red; font-weight:500; font-style:italic; ">pro</span> </option> -->
                         </select>
                     </td>
                 </tr>

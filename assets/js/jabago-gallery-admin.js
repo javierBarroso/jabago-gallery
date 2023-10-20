@@ -1,13 +1,16 @@
 var selected_images = 0
 
 function select_images(label = []){
-    upload = wp.media({title: 'Add image to gallery', button: {text: 'Use this image'}}).on('select', function(){
-        var attachment = upload.state().get('selection').first().toJSON()
-        selected_images += 1
+    upload = wp.media({title: 'Add image to gallery', button: {text: 'Use this image'}, multiple: 'add'}).on('select', function(){
+        var attachment = upload.state().get('selection')
+        let _get_image = []
+        attachment.map(function(getImage){
 
+            getImage = getImage.toJSON()
+            selected_images += 1
+            image_html(selected_images, getImage.url, label)
+        })
         
-
-        image_html(selected_images, attachment.url, label)
 
     }).open()
 }

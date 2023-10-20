@@ -35,7 +35,7 @@ if (isset($_GET['gallery'])) {
 $nonce = wp_create_nonce( 'add_gallery' );
 
 
-if (isset($_POST['save-gallery']) && wp_verify_nonce( sanitize_text_field( wp_unslash(  $_POST['nonce_field'] ) ), 'add_gallery' )) {
+if (isset($_POST['save-gallery']) && isset($_POST['url']) && wp_verify_nonce( sanitize_text_field( wp_unslash(  $_POST['nonce_field'] ) ), 'add_gallery' )) {
 
     $data = array(
         'name' => $_POST['name'],
@@ -50,9 +50,16 @@ if (isset($_POST['save-gallery']) && wp_verify_nonce( sanitize_text_field( wp_un
     );
     if ($id) {
         $callback::jabagoGalleryStoreGallery($_POST, $id);
+        ?>
+        <script>window.location.href="admin.php?page=jabago-gallery&action=edit&gallery=<?php echo esc_html( $_GET['gallery'] )?>"</script>
+        <?php
     } else {
         $callback::jabagoGalleryStoreGallery($data);
+        ?>
+            <script>window.location.href="admin.php?page=jabago-gallery"</script>
+        <?php
     }
+    
 }
 
 if (!did_action('wp_enqueue_media')) {

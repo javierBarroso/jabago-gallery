@@ -14,6 +14,7 @@ class JabagoGalleryShortcode
 
     public function jabagoSetGallery($id)
     {
+
         $gallery = JabagoGalleryAdminCallbacks::jabagoGalleryGetGallery($id);
         $theme_options = json_decode(JabagoGalleryAdminCallbacks::jabagoGalleryGetTheme($gallery->theme_id)->options);
         $images = JabagoGalleryAdminCallbacks::jabagoGalleryGetGalleryImages($id);
@@ -79,10 +80,7 @@ class JabagoGalleryShortcode
             
         }
        
-
-            
         echo wp_kses_post( $html );
-
         
     }
 }

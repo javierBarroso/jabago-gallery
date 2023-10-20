@@ -28,7 +28,6 @@ You should have received a copy of the GNU General Public License
 along with Jabago Gallery. If not, see https://www.gnu.org/licenses/gpl-3.0.html.
 */
 
-// If this file is called directly, abort.
 
 
 defined('ABSPATH') or die('You can\t access this file.');

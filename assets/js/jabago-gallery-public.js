@@ -9,8 +9,6 @@ const closeBtn = document.querySelector('.close-btn');
 gallery.querySelectorAll('.image').forEach(img => {img.addEventListener('click', () => {
         
         lightbox.style.display = 'flex';
-        // lightbox.setAttribute('open', 'open')
-        
         
         var title = img.querySelector('.jabago-img-title').innerHTML
         var description = img.querySelector('.jabago-img-description').innerHTML
